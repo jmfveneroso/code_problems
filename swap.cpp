@@ -10,6 +10,8 @@ int main() {
   y ^= x;
   x ^= y;
 
+  // x ^= y ^= x ^= y;
+
   std::cout << "After swap - x: " << x << ", y: " << y << std::endl;
 
   return 0;
