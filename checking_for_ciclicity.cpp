@@ -1,6 +1,6 @@
 // =====================================================
 // Book: Elements of programming interviews
-// Problem 7.1: Merge two sorted lists.
+// Problem 7.2: Checking for cyclicity
 // =====================================================
 
 #include <iostream>
