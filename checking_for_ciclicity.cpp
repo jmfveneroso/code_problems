@@ -17,15 +17,22 @@ class node_t {
   shared_ptr< node_t<T> > next;
 };
 
-bool detect_cycles(shared_ptr< node_t<int> > x) {
+shared_ptr< node_t<int> > detect_cycles(shared_ptr< node_t<int> > x) {
   shared_ptr< node_t<int> > y = x;
+  shared_ptr< node_t<int> > z = x;
   while (x != nullptr) {
     x = x->next;
     if (y != nullptr) y = y->next;
     if (y != nullptr) y = y->next;
-    if (x == y) break;
+    if (x != nullptr && x == y) {
+      while (z != x) {
+        x = x->next;
+        z = z->next;
+      }
+      return z; 
+    }
   }
-  return !((x == nullptr) && (y == nullptr));
+  return nullptr;
 }
 
 int main() {
@@ -39,7 +46,7 @@ int main() {
   shared_ptr< node_t<int> > d = make_shared< node_t<int> >(3, e);
   g->next = e;
 
-  cout << detect_cycles(a) << " should be false." << endl;
-  cout << detect_cycles(d) << " should be true." << endl;
+  cout << (detect_cycles(a) == nullptr) << " should be true." << endl;
+  cout << (detect_cycles(d) == e) << " should be true." << endl;
   return 0;
 }
