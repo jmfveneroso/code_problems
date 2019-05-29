@@ -1,6 +1,6 @@
 // =====================================================
 // Book: Elements of programming interviews
-// Problem 8.15: Max of a sliding window
+// Problem 8.14: Max of a sliding window
 // =====================================================
 
 #include <iostream>
