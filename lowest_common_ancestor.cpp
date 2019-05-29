@@ -43,7 +43,6 @@ shared_ptr< BinTree<int> > lowest_common_ancestor(
     if (cur->lft) q.push(cur->lft);
     if (cur->rgt) q.push(cur->rgt);
    
-    cout << cur->value << endl;
     s.push(cur);
   }
 
@@ -60,6 +59,20 @@ shared_ptr< BinTree<int> > lowest_common_ancestor(
     if (a_tmp == b_tmp) return a_tmp; 
   }
   return nullptr;
+}
+
+shared_ptr< BinTree<int> > lowest_common_ancestor2(
+  shared_ptr< BinTree<int> > root,
+  shared_ptr< BinTree<int> > a,
+  shared_ptr< BinTree<int> > b
+) {
+  if (!root) return nullptr;
+  if (root == a || root == b) return root;
+
+  shared_ptr< BinTree<int> > lft = lowest_common_ancestor2(root->lft, a, b);
+  shared_ptr< BinTree<int> > rgt = lowest_common_ancestor2(root->rgt, a, b);
+  if (lft && rgt) return root;
+  else return (lft) ? lft : rgt;
 }
 
 int main() {
@@ -84,11 +97,17 @@ int main() {
 
   shared_ptr< BinTree<int> > res = lowest_common_ancestor(a, d, e);
   cout << (res == b) << " should be true." << endl;
+  res = lowest_common_ancestor2(a, d, e);
+  cout << (res == b) << " should be true." << endl;
 
   res = lowest_common_ancestor(a, d, f);
   cout << (res == a) << " should be true." << endl;
+  res = lowest_common_ancestor2(a, d, e);
+  cout << (res == b) << " should be true." << endl;
 
   res = lowest_common_ancestor(a, b, d);
+  cout << (res == b) << " should be true." << endl;
+  res = lowest_common_ancestor2(a, d, e);
   cout << (res == b) << " should be true." << endl;
   return 0;
 }
