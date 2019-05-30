@@ -47,7 +47,7 @@ shared_ptr< BinTree<int> > lowest_common_ancestor(
     if (a != nullptr) a = a->parent;
     if (b != nullptr) b = b->parent;
   }
-  throw runtime_error("Reached root node without finding LCA.");
+  throw invalid_argument("Reached root node without finding LCA.");
 }
 
 int main() {
