@@ -1,6 +1,6 @@
 // ============================================================
 // Book: Elements of programming interviews
-// Problem 9.12: Lowest common ancestor
+// Problem 9.11: Lowest common ancestor
 // ============================================================
 
 #include <iostream>
