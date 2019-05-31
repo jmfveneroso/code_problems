@@ -24,22 +24,24 @@ int kth_largest_element(vector<int>& arr, int k, int l, int r) {
     if (p_l >= p_r) break;
     arr[p_l] ^= arr[p_r] ^= arr[p_l] ^= arr[p_r]; // Swap.
   }
-  cout << p_l << endl;
-  cout << arr << endl;
 
-  if (p_l == k) {
-    return arr[r];
+  if (p_l != r)
+    arr[p_l] ^= arr[r] ^= arr[p_l] ^= arr[r]; // Swap.
+
+  if (p_l == k - 1) {
+    return arr[p_l];
   } else if (p_l > k) {
-    cout << "a: " << l << ", " << p_l-1 << endl;
     return kth_largest_element(arr, k, l, p_l-1);
   } else {
-    cout << "a: " << p_l+1 << ", " << r-1 << endl;
-    return kth_largest_element(arr, k, p_l+1, r-1);
+    return kth_largest_element(arr, k, p_l+1, r);
   }
 }
 
 int main() {
   vector<int> arr { 3, 5, 6, 1, 4, 8, 7, 2 };
   cout << kth_largest_element(arr, 3, 0, arr.size() - 1) << " should be 3." << endl;
+
+  vector<int> arr2 { 3, 5, 6, 1, 4, 8, 7, 2 };
+  cout << kth_largest_element(arr2, 6, 0, arr.size() - 1) << " should be 6." << endl;
   return 0;
 }
