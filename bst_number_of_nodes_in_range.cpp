@@ -78,6 +78,50 @@ int nodes_in_range(
   return lft_count + rgt_count + count;
 }
 
+int find_num_smaller( 
+  shared_ptr< BinTree<int> > node, 
+  int min
+) {
+  int count = 0;
+  while (node) {
+    if (node->value >= min) {
+      node = node->lft;
+    } else {
+      count++;
+      if (node->lft) count += 1 + node->lft->num_children;
+      node = node->rgt;
+    }
+  }
+  return count;
+}
+
+int find_num_larger( 
+  shared_ptr< BinTree<int> > node, 
+  int max
+) {
+  int count = 0;
+  while (node) {
+    if (node->value <= max) {
+      node = node->rgt;
+    } else {
+      count++;
+      if (node->rgt) count += 1 + node->rgt->num_children;
+      node = node->lft;
+    }
+  }
+  return count;
+}
+
+int nodes_in_range2( 
+  shared_ptr< BinTree<int> > node, 
+  int range_min, int range_max
+) {
+  int s = find_num_smaller(node, range_min);
+  int l = find_num_larger(node, range_max);
+  int total = node->num_children + 1;
+  return total-s-l;
+}
+
 int main() {
   vector<int> arr { 
     2, 3, 5, 7, 11, 13, 17, 19, 23, 
@@ -90,5 +134,8 @@ int main() {
   cout << nodes_in_range(root, -1000, 1000, 13, 43) << " should be 9." << endl;
   cout << nodes_in_range(root, -1000, 1000, 3, 8) << " should be 3." << endl;
   cout << nodes_in_range(root, -1000, 1000, 36, 44) << " should be 3." << endl;
+  cout << nodes_in_range2(root, 13, 43) << " should be 9." << endl;
+  cout << nodes_in_range2(root, 3, 8) << " should be 3." << endl;
+  cout << nodes_in_range2(root, 36, 44) << " should be 3." << endl;
   return 0;
 }
