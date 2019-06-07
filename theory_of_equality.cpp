@@ -32,7 +32,9 @@ void assign_group(Vertex* v, int group) {
     assign_group(e, group);
 }
 
-
+// This function checks the feasibility of a set of equality and
+// inequality constraints in a set of variables. The time complexity
+// is linear in the number of variables and constraints O(V + E).
 bool is_feasible(
   vector<Vertex>& vertices,
   vector<Constraint>& equality,
