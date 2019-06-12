@@ -1,6 +1,6 @@
 // =====================================================
 // Book: Elements of programming interviews
-// Problem 5.3: Power Set
+// Problem 5.5: Power Set
 // =====================================================
 
 #include <iostream>
